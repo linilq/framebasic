@@ -1,29 +1,25 @@
 package com.linilq.dbconn;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.pool.DruidPooledConnection;
 
-import java.beans.PropertyVetoException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class C3p0MysqlConnt {
+public class DruidMysqlConnect {
 
 
     public static void main(String[] args) {
+        DruidDataSource dataSource = new DruidDataSource();
+        dataSource.setUsername(Constants.username);
+        dataSource.setPassword(Constants.password);
+        dataSource.setUrl(Constants.url);
+
         try {
-            ComboPooledDataSource dataSource = new ComboPooledDataSource();
-            dataSource.setUser(Constants.username);
-            dataSource.setPassword(Constants.password);
-            dataSource.setJdbcUrl(Constants.url);
-            dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
-            dataSource.setDataSourceName("c3p0");
+            DruidPooledConnection connection = dataSource.getConnection();
 
-
-            Connection conn = dataSource.getConnection();
-            PreparedStatement statement = conn.prepareStatement(Constants.sqlStr);
-
+            PreparedStatement statement = connection.prepareStatement(Constants.sqlStr);
             ResultSet set = statement.executeQuery();
 
             while (set.next()) {
@@ -43,12 +39,8 @@ public class C3p0MysqlConnt {
                 System.out.println(createTime);
                 System.out.println(updateTime);
             }
-
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }
