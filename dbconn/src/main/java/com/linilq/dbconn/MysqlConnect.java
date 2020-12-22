@@ -6,6 +6,12 @@ import java.sql.*;
 
 public class MysqlConnect {
 
+    static class MyTest{
+        MyTest(){
+            System.out.println("Mytest **********");
+        }
+    }
+
     public static void main(String[] args) {
 
         Connection connection = null;
