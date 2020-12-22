@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="param1" value="value1"/>
+        </plugin>
+    </plugins>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="username" value="root"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/linilq?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC&amp;rewriteBatchedStatements=true&amp;allowPublicKeyRetrieval=true"/>
+                <property name="password" value="1991linilq"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+
+
+
+    <mappers>
+        <mapper resource="com/linilq/mybatis/dao/SysUserDao.xml"/>
+        <mapper resource="com/linilq/mybatis/dao/ChildSysUserDao.xml"/>
+        <!--<package name="com.linilq.mybatis.dao"/>-->
+
+    </mappers>
+
+
+</configuration>
